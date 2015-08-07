@@ -60,4 +60,16 @@ public class MazeNode {
 
         return mazeArrayList;
     }
+
+    /*
+        This method determines if a has any unvisited neighbours.
+     */
+    public static boolean determineVisitedNeighbours(MazeNode node) {
+        if (node.isConnectedDown() || node.isConnectedLeft() ||
+                node.isConnectedRight() || node.isConnectedUp()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

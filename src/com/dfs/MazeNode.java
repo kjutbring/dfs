@@ -72,4 +72,6 @@ public class MazeNode {
             return false;
         }
     }
+
+
 }

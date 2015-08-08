@@ -10,6 +10,7 @@ public class MazeNode {
     private boolean connectedDown;
     private boolean connectedLeft;
     private boolean connectedRight;
+    private boolean isVisited;
 
     public boolean isConnectedUp() {
         return connectedUp;
@@ -43,9 +44,17 @@ public class MazeNode {
         this.connectedRight = connectedRight;
     }
 
+    public boolean isVisited() {
+        return isVisited;
+    }
+
+    public void setIsVisited(boolean isVisited) {
+        this.isVisited = isVisited;
+    }
+
     /*
-        This method returns a 2d arraylist representing a 10x10 grid of maze nodes.
-     */
+            This method returns a 2d arraylist representing a 10x10 grid of maze nodes.
+         */
     public static ArrayList<ArrayList<MazeNode>> initializeMaze() {
         // create array with nodes, this creates a 10x10 grid.
         ArrayList<MazeNode> mazeNodeArrayList = new ArrayList<MazeNode>();

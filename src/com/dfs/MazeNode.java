@@ -56,16 +56,17 @@ public class MazeNode {
             This method returns a 2d arraylist representing a 10x10 grid of maze nodes.
          */
     public static ArrayList<ArrayList<MazeNode>> initializeMaze() {
-        // create array with nodes, this creates a 10x10 grid.
+        // create array with nodes
         ArrayList<MazeNode> mazeNodeArrayList = new ArrayList<MazeNode>();
         for (int i = 0; i < 10; i++) {
-            for (int y = 0; y < 10; y++) {
-                mazeNodeArrayList.add(new MazeNode());
-            }
+            mazeNodeArrayList.add(new MazeNode());
         }
 
         ArrayList<ArrayList<MazeNode>> mazeArrayList = new ArrayList<>();
-        mazeArrayList.add(mazeNodeArrayList);
+        // add array ten times to create the grid
+        for (int i = 0; i <10; i++) {
+            mazeArrayList.add(mazeNodeArrayList);
+        }
 
         return mazeArrayList;
     }
@@ -76,6 +77,17 @@ public class MazeNode {
     public static boolean determineVisitedNeighbours(MazeNode node) {
         if (node.isConnectedDown() || node.isConnectedLeft() ||
                 node.isConnectedRight() || node.isConnectedUp()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /*
+        This method determines if a node is visited.
+     */
+    public static boolean isNodeVisited(MazeNode node) {
+        if (node.isVisited()) {
             return true;
         } else {
             return false;

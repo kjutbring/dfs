@@ -57,18 +57,28 @@ public class Main {
     /*
         This method parses a string direction to select the correct node
      */
-    /*
-    public static MazeNode parseStringToNode(String direction, ArrayList<ArrayList<MazeNode>> nodeGrid) {
-        int down = -1
-        int left = -1;
-        int right = 1;
-        int up = 1;
-        MazeNode node
+
+    public static MazeNode parseStringToNode(String direction, ArrayList<ArrayList<MazeNode>> nodeGrid,
+                                             int x, int y) {
+        int down =  y - 1;
+        int left =  x - 1;
+        int right = x + 1;
+        int up = y + 1;
+        MazeNode newNode;
 
         if (direction.equals("Down")) {
-            node = nodeGrid.get(1).get(2);
+            newNode = nodeGrid.get(down).get(x);
+        } if (direction.equals("Left")) {
+            newNode = nodeGrid.get(y).get(left);
+        } if (direction.equals("Right")) {
+            newNode = nodeGrid.get(y).get(right);
+        } if (direction.equals("Up")) {
+            newNode = nodeGrid.get(up).get(x);
+        } else {
+            newNode = new MazeNode();
         }
-        return node;
+
+        return newNode;
     }
-    */
+
 }

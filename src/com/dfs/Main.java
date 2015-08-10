@@ -8,77 +8,24 @@ import java.util.Stack;
 public class Main {
 
     public static void main(String[] args) {
+        // start coordinates for debugging
+        int startX = 4;
+        int startY = 2;
+        mazeDfs(startX, startY);
+    }
 
+    public static void mazeDfs(int startX, int startY) {
         ArrayList<ArrayList<MazeNode>> nodeArray = MazeNode.initializeMaze();
 
-        // initialize stack
-        Stack nodeStack = new Stack();
-        System.out.println(nodeArray);
+        while (true) {
 
-
-    }
-
-    /*
-        This method adds a MazeNode to the stack
-     */
-    /*
-    public static Stack addToStack(Stack stack) {
-        stack.pop();
-
-    }
-    */
-
-    /*
-        This randomly selects from the unvisited neigbours which direction to go next.
-     */
-    public static String selectNeigbour(MazeNode node) {
-        ArrayList<String> directionList = new ArrayList<String>();
-        if (MazeNode.determineVisitedNeighbours(node)) {
-            if (!node.isConnectedDown()) {
-                directionList.add("Down");
-            } if (!node.isConnectedLeft()) {
-                directionList.add("Left");
-            } if (!node.isConnectedRight()) {
-                directionList.add("Right");
-            } if (!node.isConnectedUp()) {
-                directionList.add("Up");
-            }
-        } else {
-            System.out.println("No unvisited neigbours.");
         }
-
-        // get random object from string
-        Random random = new Random();
-        int index = random.nextInt(directionList.size());
-
-        return directionList.get(index);
     }
 
     /*
-        This method parses a string direction to select the correct node
+        This function selects coordinates for a random node in the grid
+        to start from.
      */
 
-    public static MazeNode parseStringToNode(String direction, ArrayList<ArrayList<MazeNode>> nodeGrid,
-                                             int x, int y) {
-        int down =  y - 1;
-        int left =  x - 1;
-        int right = x + 1;
-        int up = y + 1;
-        MazeNode newNode;
-
-        if (direction.equals("Down")) {
-            newNode = nodeGrid.get(down).get(x);
-        } if (direction.equals("Left")) {
-            newNode = nodeGrid.get(y).get(left);
-        } if (direction.equals("Right")) {
-            newNode = nodeGrid.get(y).get(right);
-        } if (direction.equals("Up")) {
-            newNode = nodeGrid.get(up).get(x);
-        } else {
-            newNode = new MazeNode();
-        }
-
-        return newNode;
-    }
 
 }

@@ -6,11 +6,29 @@ import java.util.ArrayList;
  * Created by kittyj on 8/7/15.
  */
 public class MazeNode {
+    private int xPos;
+    private int yPos;
     private boolean connectedUp;
     private boolean connectedDown;
     private boolean connectedLeft;
     private boolean connectedRight;
     private boolean isVisited;
+
+    public int getxPos() {
+        return xPos;
+    }
+
+    public void setxPos(int xPos) {
+        this.xPos = xPos;
+    }
+
+    public int getyPos() {
+        return yPos;
+    }
+
+    public void setyPos(int yPos) {
+        this.yPos = yPos;
+    }
 
     public boolean isConnectedUp() {
         return connectedUp;
@@ -72,11 +90,12 @@ public class MazeNode {
     }
 
     /*
-        This method determines if a has any unvisited neighbours.
+        This method determines if a node has any unvisited neighbours.
      */
     public static boolean determineVisitedNeighbours(MazeNode node) {
         if (node.isConnectedDown() || node.isConnectedLeft() ||
                 node.isConnectedRight() || node.isConnectedUp()) {
+            System.out.println("has univisited nebgbgsrs");
             return true;
         } else {
             return false;
@@ -93,6 +112,8 @@ public class MazeNode {
             return false;
         }
     }
+
+
 
 
 }

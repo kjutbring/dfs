@@ -1,33 +1,25 @@
 package com.dfs;
 
+import java.awt.*;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
  * Created by kittyj on 8/7/15.
  */
 public class MazeNode {
-    private int xPos;
-    private int yPos;
     private boolean connectedUp;
     private boolean connectedDown;
     private boolean connectedLeft;
     private boolean connectedRight;
     private boolean isVisited;
+    private boolean isExit;
+    private int xPos;
+    private int yPos;
 
-    public int getxPos() {
-        return xPos;
-    }
-
-    public void setxPos(int xPos) {
-        this.xPos = xPos;
-    }
-
-    public int getyPos() {
-        return yPos;
-    }
-
-    public void setyPos(int yPos) {
-        this.yPos = yPos;
+    public MazeNode(int x, int y) {
+        xPos = x;
+        yPos = y;
     }
 
     public boolean isConnectedUp() {
@@ -70,23 +62,49 @@ public class MazeNode {
         this.isVisited = isVisited;
     }
 
+    public boolean isExit() {
+        return isExit;
+    }
+
+    public void setIsExit(boolean isExit) {
+        this.isExit = isExit;
+    }
+
+    public int getxPos() {
+        return xPos;
+    }
+
+    public void setxPos(int xPos) {
+        this.xPos = xPos;
+    }
+
+    public int getyPos() {
+        return yPos;
+    }
+
+    public void setyPos(int yPos) {
+        this.yPos = yPos;
+    }
+
     /*
-            This method returns a 2d arraylist representing a 10x10 grid of maze nodes.
-         */
+        This method returns a 2d arraylist representing a 10x10 grid of maze nodes.
+    */
     public static ArrayList<ArrayList<MazeNode>> initializeMaze() {
         // create array with nodes
         ArrayList<MazeNode> mazeNodeArrayList = new ArrayList<MazeNode>();
+        ArrayList<ArrayList<MazeNode>> mazeGrid = new ArrayList<ArrayList<MazeNode>>();
         for (int i = 0; i < 10; i++) {
-            mazeNodeArrayList.add(new MazeNode());
+            for (int j = 0; j < 10; j++) {
+                mazeNodeArrayList.add(new MazeNode(j,i));
+            }
         }
 
-        ArrayList<ArrayList<MazeNode>> mazeArrayList = new ArrayList<>();
-        // add array ten times to create the grid
-        for (int i = 0; i <10; i++) {
-            mazeArrayList.add(mazeNodeArrayList);
+        // add elements of arraylist into the 2d arraylist.
+        for (int i = 0; i < mazeNodeArrayList.size(); i = i + 10) {
+            mazeGrid.add(new ArrayList<MazeNode>(mazeNodeArrayList.subList(i, i + 10)));
         }
 
-        return mazeArrayList;
+        return mazeGrid;
     }
 
     /*

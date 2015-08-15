@@ -12,14 +12,14 @@ public class MazeNode {
     private boolean connectedDown;
     private boolean connectedLeft;
     private boolean connectedRight;
-    private boolean isVisited;
-    private boolean isExit;
-    private int xPos;
-    private int yPos;
+    private boolean visited;
+    private boolean exit;
+    private int px;
+    private int py;
 
     public MazeNode(int x, int y) {
-        xPos = x;
-        yPos = y;
+        px = x;
+        py = y;
     }
 
     public boolean isConnectedUp() {
@@ -55,47 +55,39 @@ public class MazeNode {
     }
 
     public boolean isVisited() {
-        return isVisited;
+        return visited;
     }
 
-    public void setIsVisited(boolean isVisited) {
-        this.isVisited = isVisited;
+    public void setVisited(boolean visited) {
+        this.visited = visited;
     }
 
     public boolean isExit() {
-        return isExit;
+        return exit;
     }
 
-    public void setIsExit(boolean isExit) {
-        this.isExit = isExit;
+    public void setExit(boolean exit) {
+        this.exit = exit;
     }
 
-    public int getxPos() {
-        return xPos;
+    public int getPx() {
+        return px;
     }
 
-    public void setxPos(int xPos) {
-        this.xPos = xPos;
-    }
-
-    public int getyPos() {
-        return yPos;
-    }
-
-    public void setyPos(int yPos) {
-        this.yPos = yPos;
+    public int getPy() {
+        return py;
     }
 
     /*
-        This method returns a 2d arraylist representing a 10x10 grid of maze nodes.
-    */
+                This method returns a 2d arraylist representing a 10x10 grid of maze nodes.
+            */
     public static ArrayList<ArrayList<MazeNode>> initializeMaze() {
         // create array with nodes
         ArrayList<MazeNode> mazeNodeArrayList = new ArrayList<MazeNode>();
         ArrayList<ArrayList<MazeNode>> mazeGrid = new ArrayList<ArrayList<MazeNode>>();
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
-                mazeNodeArrayList.add(new MazeNode(j,i));
+                mazeNodeArrayList.add(new MazeNode(j, i));
             }
         }
 
@@ -113,7 +105,7 @@ public class MazeNode {
     public static boolean determineVisitedNeighbours(MazeNode node) {
         if (node.isConnectedDown() || node.isConnectedLeft() ||
                 node.isConnectedRight() || node.isConnectedUp()) {
-            System.out.println("has univisited nebgbgsrs");
+            //System.out.println("has univisited nebgbgsrs");
             return true;
         } else {
             return false;

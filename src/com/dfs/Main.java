@@ -15,16 +15,14 @@ public class Main {
         int startY = 2;
 
         ArrayList<ArrayList<MazeNode>> grid = MazeNode.initializeMaze();
-        MazeNode node = grid.get(4).get(2);
-        System.out.println(node.isVisited());
-        node.setVisited(true);
-        System.out.println(node.isVisited());
 
         // set the node where the end/exit is
         int exitX = 0;
         int exitY = 0;
 
         grid = mazeDfs(startX, startY, grid);
+
+        generateMaze(grid);
 
         System.out.println("Done...?");
 
@@ -35,68 +33,91 @@ public class Main {
         This method is recursive and visits each node until the exit.
      */
     public static ArrayList<ArrayList<MazeNode>> mazeDfs(int x, int y, ArrayList<ArrayList<MazeNode>> grid) {
-        Stack stack = new Stack();
+        Stack<MazeNode> stack = new Stack();
 
         MazeNode tempNode;
         MazeNode node = grid.get(y).get(x);
+        node.setVisited(true);
 
-
-
-        while (!node.isVisited()) {
+        int visitedCells = 1;
+        while (visitedCells < 100) {
+            Integer direction = randomDirections(node);
             node.setVisited(true);
+
             // check if node have any unvisited neighbours
             if (!MazeNode.determineVisitedNeighbours(node)) {
-                stack.push(node);
-
-                if (randomDirections(node) == 0) {
+                if (direction.equals(0)) {
                     // check if position is outside grid
-                    if (y - 1 >= 0) {
+                    if (y - 2 >= 0) {
                         node.setConnectedUp(true);
-                        grid.get(y - 1).get(x).setConnectedDown(true);
-                        node = grid.get(y - 1).get(x);
+                        grid.get(y - 2).get(x).setConnectedDown(true);
+                        grid.get(y - 1).get(x).setVisited(true);
+                        node = grid.get(y - 2).get(x);
+                        stack.push(node);
                     }
                 }
 
-                if (randomDirections(node) == 1) {
+                if (direction.equals(1)) {
                     // check if position is outside grid.
-                    if (y + 1 <= 9) {
+                    if (y + 2 <= 9) {
                         node.setConnectedDown(true);
-                        grid.get(y + 1).get(x).setConnectedUp(true);
-                        node = grid.get(y + 1).get(x);
+                        grid.get(y + 2).get(x).setConnectedUp(true);
+                        grid.get(y + 1).get(x).setVisited(true);
+                        node = grid.get(y + 2).get(x);
+                        stack.push(node);
                     }
                 }
 
-                if (randomDirections(node) == 2) {
+                if (direction.equals(2)) {
                     // check if position is outside grid
-                    if (x - 1 >= 0) {
+                    if (x - 2 >= 0) {
                         node.setConnectedLeft(true);
-                        grid.get(y).get(x - 1).setConnectedRight(true);
-                        node = grid.get(y).get(x - 1);
+                        grid.get(y).get(x - 2).setConnectedRight(true);
+                        grid.get(y).get(x - 1).setVisited(true);
+                        node = grid.get(y).get(x - 2);
+                        stack.push(node);
                     }
                 }
 
-                if (randomDirections(node) == 3) {
+                if (direction.equals(3)) {
                     // check if position is outside grid
-                    if (x + 1 <= 9) {
+                    if (x + 2 <= 9) {
                         node.setConnectedRight(true);
-                        grid.get(y).get(x + 1).setConnectedLeft(true);
-                        node = grid.get(y).get(x + 1);
-
+                        grid.get(y).get(x + 2).setConnectedLeft(true);
+                        grid.get(y).get(x - 1).setVisited(true);
+                        node = grid.get(y).get(x + 2);
+                        stack.push(node);
                     }
                 }
-            } else {
-                if (!stack.empty()) {
-                    tempNode = (MazeNode)stack.pop();
-                    node = grid.get(tempNode.getPy()).get(tempNode.getPx());
+
+                else {
+                    if (!stack.empty()) {
+                        tempNode = stack.pop();
+                        node = tempNode;
+                    }
                 }
             }
+            visitedCells += 1;
         }
         return grid;
-
     }
 
 
 
+    /*
+        This method prints all nodes
+     */
+    public static void generateMaze(ArrayList<ArrayList<MazeNode>> maze) {
+        for (ArrayList<MazeNode> mazeArray : maze) {
+            for (MazeNode node : mazeArray) {
+                if (node.isVisited()) {
+                    System.out.print(".");
+                } else {
+                    System.out.print("a");
+                }
+            }
+        }
+    }
 
     /*
         This method generates a random direction to go next
